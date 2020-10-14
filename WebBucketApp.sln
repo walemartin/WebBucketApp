@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30523.141
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebBucketApp", "WebBucketApp.csproj", "{D30B4163-2BA5-441F-AB1E-1B66F68D606A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebBucketApp.Tests", "..\WebBucketApp.Tests\WebBucketApp.Tests.csproj", "{A83DB15B-82AA-46E2-A9A5-153394C9AB9C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D30B4163-2BA5-441F-AB1E-1B66F68D606A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D30B4163-2BA5-441F-AB1E-1B66F68D606A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D30B4163-2BA5-441F-AB1E-1B66F68D606A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D30B4163-2BA5-441F-AB1E-1B66F68D606A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A83DB15B-82AA-46E2-A9A5-153394C9AB9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A83DB15B-82AA-46E2-A9A5-153394C9AB9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A83DB15B-82AA-46E2-A9A5-153394C9AB9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A83DB15B-82AA-46E2-A9A5-153394C9AB9C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9B048F60-095B-4393-ADD2-56EB18E5CB6C}
+	EndGlobalSection
+EndGlobal
