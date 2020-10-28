@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>Immerse Laundry Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
+    <title>BUCKETT LAUNDRY</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <meta name="keywords" content="Immerse a Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
@@ -30,10 +30,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="w3_bandwn">
             <div class="container">
                 <div class="col-md-3 w3_l">
-                    <i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@example.com">info@example.com</a>
+                    <i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@rytesoftcompany.net">info@rytesoftcompany.net</a>
                 </div>
                 <div class="col-md-6 w3_c">
-                    <i class="fa fa-phone" aria-hidden="true"></i> +456 123 7890
+                    <i class="fa fa-phone" aria-hidden="true"></i> +2348062667809
                 </div>
                 <div class="col-md-3 w3_r">
                     <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
@@ -54,7 +54,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <h1><a class="navbar-brand" href="#">IMMERSE</a></h1>
+                    <h1><a class="navbar-brand" href="#">BUCKETT</a></h1>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -66,16 +66,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li><a href="#gallery" class="page-scroll">GALLERY</a></li>
                         <li><a href="#testimonials" class="page-scroll">TESTIMONIALS</a></li>
                         <li><a href="#contact" class="page-scroll">CONTACT</a></li>
-                        <form class="navbar-form navbar-left">
+                        <li><a href="@Url.Action("Index", "ClientDetails")">MY ACCOUNT</a></li>
+                        
+                        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li><a href="@Url.Action("Index", "Admin")">ADMIN</a></li>
+                        }
+                        @*<form class="navbar-form navbar-left">
                             <div class="w3l_frm">
                                 <form action="#" method="post">
                                     <button type="submit"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></button>
                                     <input type="text" name="search" placeholder="Search" required="">
                                 </form>
                             </div>
+                        </form>*@
 
-
-                </div><!-- /.navbar-collapse -->
+</div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
         @RenderBody()
@@ -454,7 +460,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                     </div>
                     <div class="map-grid">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387142.8400948023!2d-74.25819082602831!3d40.70583163923578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew+York%2C+NY%2C+USA!5e0!3m2!1sen!2sin!4v1470295981376" height="500" allowfullscreen></iframe>
+                        @*<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387142.8400948023!2d-74.25819082602831!3d40.70583163923578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew+York%2C+NY%2C+USA!5e0!3m2!1sen!2sin!4v1470295981376" height="500" allowfullscreen></iframe>*@
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3963.322500383406!2d3.379797914266834!3d6.606788224023685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103b92fefed94091%3A0x7b9ccf6019787d7e!2sSalawe%20Bus%20Stop!5e0!3m2!1sen!2sng!4v1603398452164!5m2!1sen!2sng" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                     </div>
                 </div>
                 <div class="col-md-6 agile-contact-right">
@@ -505,18 +512,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="container">
             <div class="list">
                 <div class="col-md-3 wthree_fl">
-                    <a href="#">IMMERSE</a>
+                    <a href="#">BUCKETT</a>
                 </div>
 
                 <div class="col-md-6 wthree_fc">
-                    <h6> Sophia Road </h6>
-                    <h6> 1594 Nicolas </h6>
-                    <h6> U S A </h6>
+                    <h6> RYTESOFT COMPANY </h6>
+                    <h6> IKOSI, LAGOS </h6>
+                    <h6> NIGERIA </h6>
                 </div>
 
                 <div class="col-md-3 wthree_fr">
-                    <h6>+1 358 649 4885</h6>
-                    <h6><a href="mailto:service@decorate.com">service@decorate.com</a></h6>
+                    <h6>+2348062667809</h6>
+                    <h6><a href="mailto:info@rytesoftcompany.net">info@rytesoftcompany.net</a></h6>
                 </div>
 
 
@@ -526,7 +533,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- //footer -->
     <div class="copyright">
         <div class="container">
-            <p>© 2018 Bucket. All rights reserved | Design by <a href="http://rytesoftcompany.com">RYTESOFT</a></p>
+            <p>© @DateTime.Now.Year Bucket. All rights reserved | Powered by <a href="http://rytesoftcompany.com">RYTESOFT COMPANY</a></p>
         </div>
     </div>
    

@@ -1,0 +1,60 @@
+﻿@model WebBucketApp.Models.CompanyToken
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_PartialConsole.cshtml";
+}
+
+
+<h2>Details</h2>
+
+<div>
+    <h4>CompanyToken</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Branch)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Branch)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CompToken)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CompToken)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpirationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpirationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrxnDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrxnDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

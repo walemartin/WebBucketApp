@@ -1,0 +1,44 @@
+﻿@model WebBucketApp.Models.ImageDir
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_PartialConsole.cshtml";
+}
+
+
+<h2>Details</h2>
+
+<div>
+    <h4>ImageDir</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ClientNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClientNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContractNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContractNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DocPath)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DocPath)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

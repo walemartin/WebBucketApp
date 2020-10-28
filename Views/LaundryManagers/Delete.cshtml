@@ -1,0 +1,123 @@
+﻿@model WebBucketApp.Models.LaundryManager
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_PartialConsole.cshtml";
+}
+
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>LaundryManager</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ClientNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClientNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContractNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContractNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShirtNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShirtNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrouserNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrouserNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.JeanNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JeanNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AgbadaCompleteNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AgbadaCompleteNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClientRemark)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClientRemark)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Branch)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Branch)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrxnDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrxnDate)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

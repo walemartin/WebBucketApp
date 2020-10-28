@@ -45,6 +45,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=4.2.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>packages\AutoMapper.4.2.1\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Fluent.Infrastructure, Version=1.2.2.0, Culture=neutral, PublicKeyToken=fc0859e40caf6c5d, processorArchitecture=MSIL">
+      <HintPath>packages\Fluent.Infrastructure.2.0.0-beta-01\lib\net461\Fluent.Infrastructure.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -101,6 +110,9 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>packages\WebActivatorEx.2.1.0\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
@@ -174,26 +186,46 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\App_Start.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Context\DbContextLocal.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\ClientDetailsController.cs" />
+    <Compile Include="Controllers\CompanyTokensController.cs" />
+    <Compile Include="Controllers\ForumController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImageDirsController.cs" />
+    <Compile Include="Controllers\LaundryManagersController.cs" />
+    <Compile Include="Controllers\LaundryPaymentsController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\RolesAdminController.cs" />
+    <Compile Include="Controllers\UsersAdminController.cs" />
+    <Compile Include="Controllers\WashWorkFlowsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mapper\ForumMap.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\ClientDetail.cs" />
+    <Compile Include="Models\CompanyToken.cs" />
+    <Compile Include="Models\Forum.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LaundryManager.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\QRCodeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SharedDatabase\SharedData.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\RoleViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -207,6 +239,7 @@
     <Content Include="immerse\web\css\bootstrap.min.css" />
     <Content Include="immerse\web\css\cm-overlay.css" />
     <Content Include="immerse\web\css\font-awesome.min.css" />
+    <Content Include="immerse\web\css\formsStyle.css" />
     <Content Include="immerse\web\css\lightbox.css" />
     <Content Include="immerse\web\css\owl.carousel.css" />
     <Content Include="immerse\web\css\style.css" />
@@ -243,6 +276,7 @@
     <Content Include="immerse\web\js\owl.carousel.js" />
     <Content Include="immerse\web\js\SmoothScroll.min.js" />
     <Content Include="immerse\web\w3layouts-License.txt" />
+    <Content Include="readme.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="immerse\web\fonts\fontawesome-webfont.eot" />
@@ -286,7 +320,6 @@
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\SendCode.cshtml" />
@@ -301,9 +334,69 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_LayoutFront.cshtml" />
     <Content Include="Views\Home\LandingPage.cshtml" />
+    <Content Include="Views\RolesAdmin\Index.cshtml" />
+    <Content Include="Views\RolesAdmin\Details.cshtml" />
+    <Content Include="Views\RolesAdmin\Create.cshtml" />
+    <Content Include="Views\RolesAdmin\Edit.cshtml" />
+    <Content Include="Views\RolesAdmin\Delete.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\UsersAdmin\Index.cshtml" />
+    <Content Include="Views\UsersAdmin\Details.cshtml" />
+    <Content Include="Views\CompanyTokens\Create.cshtml" />
+    <Content Include="Views\CompanyTokens\Delete.cshtml" />
+    <Content Include="Views\CompanyTokens\Details.cshtml" />
+    <Content Include="Views\CompanyTokens\Edit.cshtml" />
+    <Content Include="Views\CompanyTokens\Index.cshtml" />
+    <Content Include="Views\UsersAdmin\Create.cshtml" />
+    <Content Include="Views\UsersAdmin\Edit.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Manage\IndexPage.cshtml" />
+    <Content Include="Views\Manage\Edit.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Products\Create.cshtml" />
+    <Content Include="Views\Products\Delete.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
+    <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\ClientDetails\Create.cshtml" />
+    <Content Include="Views\ClientDetails\Delete.cshtml" />
+    <Content Include="Views\ClientDetails\Details.cshtml" />
+    <Content Include="Views\ClientDetails\Edit.cshtml" />
+    <Content Include="Views\ClientDetails\Index.cshtml" />
+    <Content Include="Views\LaundryManagers\Create.cshtml" />
+    <Content Include="Views\LaundryManagers\Delete.cshtml" />
+    <Content Include="Views\LaundryManagers\Details.cshtml" />
+    <Content Include="Views\LaundryManagers\Edit.cshtml" />
+    <Content Include="Views\LaundryManagers\Index.cshtml" />
+    <Content Include="Views\ImageDirs\Create.cshtml" />
+    <Content Include="Views\ImageDirs\Delete.cshtml" />
+    <Content Include="Views\ImageDirs\Details.cshtml" />
+    <Content Include="Views\ImageDirs\Edit.cshtml" />
+    <Content Include="Views\ImageDirs\Index.cshtml" />
+    <Content Include="Views\LaundryPayments\Create.cshtml" />
+    <Content Include="Views\LaundryPayments\Delete.cshtml" />
+    <Content Include="Views\LaundryPayments\Details.cshtml" />
+    <Content Include="Views\LaundryPayments\Edit.cshtml" />
+    <Content Include="Views\LaundryPayments\Index.cshtml" />
+    <Content Include="Views\WashWorkFlows\Create.cshtml" />
+    <Content Include="Views\WashWorkFlows\Delete.cshtml" />
+    <Content Include="Views\WashWorkFlows\Details.cshtml" />
+    <Content Include="Views\WashWorkFlows\Edit.cshtml" />
+    <Content Include="Views\WashWorkFlows\Index.cshtml" />
+    <Content Include="Views\Shared\_PartialConsole.cshtml" />
+    <Content Include="Views\Shared\Index.cshtml" />
+    <Content Include="Views\Forum\New.cshtml" />
+    <Content Include="Views\Forum\AddReturn.cshtml" />
+    <Content Include="Views\Account\DisplayEmail.cshtml" />
+    <Content Include="Views\Account\LicenseAdmin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ViewModels\AdminViewModel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

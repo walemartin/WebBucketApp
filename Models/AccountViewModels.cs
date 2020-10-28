@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace WebBucketApp.Models
@@ -64,6 +65,11 @@ namespace WebBucketApp.Models
 
     public class RegisterViewModel
     {
+        public RegisterViewModel()
+        {
+            TrxnDate = DateTime.Now;
+        }
+        public int ID { get; set; }
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -79,6 +85,35 @@ namespace WebBucketApp.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+        [Required]
+        [Display(Name = "First Name")]
+        [StringLength(50)]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Last Name")]
+        [StringLength(50)]
+        public string LastName { get; set; }
+
+        public int? CompanyTokenId { get; set; }
+        public virtual CompanyToken CompanyToken { get; set; }
+
+        [Display(Name = "Address")]
+        [DataType(DataType.MultilineText)]
+        [StringLength(250)]
+        public string Address { get; set; }
+
+        [Display(Name = "Token")]
+        public string CompToken { get; set; }
+
+        [Display(Name = "Phone Number")]
+        [DataType(DataType.PhoneNumber)]
+        public string PhoneNo { get; set; }
+
+        [DataType(DataType.Date)]
+        [Display(Name = "Created Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime TrxnDate { get; set; }
     }
 
     public class ResetPasswordViewModel

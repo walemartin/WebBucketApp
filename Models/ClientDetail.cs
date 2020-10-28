@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace WebBucketApp.Models
 {
@@ -10,7 +7,7 @@ namespace WebBucketApp.Models
     {
         public ClientDetail()
         {
-            PostDate = DateTime.Now;
+            TrxnDate = DateTime.Now;
             IsActive = true;
         }
         public int ID { get; set; }
@@ -43,9 +40,9 @@ namespace WebBucketApp.Models
         [DataType(DataType.MultilineText), MaxLength(250)]
         public string HomeAddress { get; set; }
 
-        [Display(Name = "Email")]
+        [Display(Name = "Client Email")]
         [DataType(DataType.EmailAddress)]
-        public string Email { get; set; }
+        public string CiientEmail { get; set; }
 
         [Display(Name = "Mobile Number")]
         [DataType(DataType.PhoneNumber)]
@@ -55,14 +52,14 @@ namespace WebBucketApp.Models
         public bool IsActive { get; set; }
 
         [Display(Name = "Created by")]
-        public string CreatedBy { get; set; }
+        public string Email { get; set; }
 
         [Display(Name = "Office Branch")]
         public string Branch { get; set; }
 
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         [Display(Name = "Created Date")]
-        public DateTime PostDate { get; set; }
+        public DateTime TrxnDate { get; set; }
     }
     public enum Gender
     {

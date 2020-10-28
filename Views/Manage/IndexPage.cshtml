@@ -1,0 +1,68 @@
+﻿@model WebBucketApp.Models.ApplicationUser
+@{
+    ViewBag.Title = "IndexPage";
+    Layout = "~/Views/Shared/_LayoutFront.cshtml";
+}
+
+
+<dt>
+    @Html.DisplayNameFor(model => model.FirstName)
+</dt>
+<dd>
+    @Html.DisplayFor(model => model.FirstName)
+</dd>
+<dt>
+    @Html.DisplayNameFor(model => model.LastName)
+</dt>
+<dd>
+    @Html.DisplayFor(model => model.LastName)
+</dd>
+<dt>
+    @Html.DisplayNameFor(model => model.Email)
+</dt>
+<dd>
+    @Html.DisplayFor(model => model.Email)
+</dd>
+<dt>
+    @Html.DisplayNameFor(model => model.PhoneNo)
+</dt>
+<dd>
+    @Html.DisplayFor(model => model.PhoneNo)
+</dd>
+<dt>
+    @Html.DisplayNameFor(model => model.CompanyToken.CompToken)
+</dt>
+<dd>
+    @Html.DisplayFor(model => model.CompanyToken.CompToken)
+</dd>
+<dt>
+    @Html.DisplayNameFor(model => model.CompToken)
+</dt>
+<dd>
+    @Html.DisplayFor(model => model.CompToken)
+</dd>
+
+<dt>
+    @Html.DisplayNameFor(model => model.Address)
+</dt>
+<dd>
+    @Html.DisplayFor(model => model.Address)
+</dd>
+<dt>
+    @Html.DisplayNameFor(model => model.TrxnDate)
+</dt>
+<dd>
+    @Html.DisplayFor(model => model.TrxnDate)
+</dd>
+
+
+<dt>
+    Password
+</dt>
+<dd>
+    @Html.ActionLink("Change your password", "ChangePassword")
+</dd>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    
+</p>

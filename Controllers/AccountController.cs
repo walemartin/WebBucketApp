@@ -15,6 +15,7 @@ namespace WebBucketApp.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -72,25 +73,51 @@ namespace WebBucketApp.Controllers
             {
                 return View(model);
             }
-
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-            switch (result)
+            //add code to check if the user'e email is confirmed
+            var userid = UserManager.FindByEmail(model.Email);
+            //add code to check if the user'e license has not expired or is confirmed
+            var d = db.CompanyTokens.Where(a => a.Email==userid.Email && a.ExpirationDate<=a.TrxnDate).FirstOrDefault();
+            if (d != null)
             {
-                case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
-                case SignInStatus.Failure:
-                default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
-                    return View(model);
+                if (!UserManager.IsEmailConfirmed(userid.Id))
+                {
+                    return View("EmailNotConfirmed");
+                    //if the user's email is not confirmed, return to the view page that inform that the user hasn't confirmed his email
+                }
+                //check if a user was previously logged in without logging out. This can occur for example
+                //if a logged in user is redirected to an admin page and then an admin user logs in
+                bool userWasLoggedIn = false;
+                if (!string.IsNullOrWhiteSpace(User.Identity.Name))
+                {
+                    userWasLoggedIn = true;
+                }
+                // This doesn't count login failures towards account lockout
+                // To enable password failures to trigger account lockout, change to shouldLockout: true
+                var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+                switch (result)
+                {
+                    case SignInStatus.Success:
+                        return RedirectToLocal(returnUrl);
+                    case SignInStatus.LockedOut:
+                        return View("Lockout");
+                    case SignInStatus.RequiresVerification:
+                        return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    case SignInStatus.Failure:
+                    default:
+                        ModelState.AddModelError("", "Invalid login attempt.");
+                        return View(model);
+                }
+            }
+            else
+            {
+                return View("LicenseAdmin");
             }
         }
-
+            
+        public ActionResult LicenseAdmin()
+        {
+            return View();
+        }
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
@@ -139,7 +166,12 @@ namespace WebBucketApp.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            RegisterViewModel nm = new RegisterViewModel()
+            {
+                TrxnDate = DateTime.Now,
+            };
+            ViewBag.CompanyTokenId = new SelectList(db.CompanyTokens, "ID", "Branch");
+            return View(nm);
         }
 
         //
@@ -151,23 +183,32 @@ namespace WebBucketApp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { 
+                    UserName = model.Email, 
+                    Email = model.Email,
+                    TrxnDate = model.TrxnDate,
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    Address = model.Address,
+                    CompToken=model.CompToken,
+                    CompanyTokenId=model.CompanyTokenId
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await UserManager.AddToRoleAsync(user.Id, "Users");
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                   
+                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    return RedirectToAction("LandingPage", "Home");
                 }
                 AddErrors(result);
             }
-
+            ViewBag.CompanyTokenId = new SelectList(db.CompanyTokens, "ID", "Branch",model.CompanyTokenId);
             // If we got this far, something failed, redisplay form
             return View(model);
         }
@@ -211,16 +252,34 @@ namespace WebBucketApp.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+        // GET: /Account/DisplayEmail
+        [HttpGet]
+        [Authorize]
+        public ActionResult DisplayEmail()
+        {
+            // Sign out and show DisplayEmail view
+            AuthenticationManager.SignOut();
+            return View();
+        }
 
+        // GET: /Account/SilentLogOff
+        [HttpGet]
+        [Authorize]
+        public ActionResult SilentLogOff()
+        {
+            // Sign out and redirect to Login
+            AuthenticationManager.SignOut();
+            return RedirectToAction("Login");
+        }
         //
         // GET: /Account/ForgotPasswordConfirmation
         [AllowAnonymous]
@@ -234,7 +293,9 @@ namespace WebBucketApp.Controllers
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
-            return code == null ? View("Error") : View();
+            //return code == null ? View("Error") : View();
+            
+            return View();
         }
 
         //
@@ -254,7 +315,8 @@ namespace WebBucketApp.Controllers
                 // Don't reveal that the user does not exist
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
-            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+            string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+            var result = await UserManager.ResetPasswordAsync(user.Id, code, model.Password);
             if (result.Succeeded)
             {
                 return RedirectToAction("ResetPasswordConfirmation", "Account");

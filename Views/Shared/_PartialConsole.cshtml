@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title - BUCKETT LAUNDRY</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Buckett, Laundry" />
+
+    <link href="~/immerse/web/css/bootstrap.min.css" rel="stylesheet" media="all" />
+    <link href="~/immerse/web/css/font-awesome.min.css" rel="stylesheet" media="all" />
+
+    <link href="~/immerse/web/css/owl.carousel.css" rel="stylesheet" />
+
+    <link href="~/immerse/web/css/lightbox.css" rel="stylesheet" />
+
+    <link href="~/immerse/web/css/cm-overlay.css" rel="stylesheet" />
+    <link href="~/immerse/web/css/formsStyle.css" rel="stylesheet" media="all" />
+
+    @*<link href="~/immerse/web/css/style.css" rel="stylesheet" media="all" />*@
+
+    <!-- Latest compiled and minified CSS -->
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">*@
+
+    <!-- jQuery library -->
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>*@
+
+    <!-- Latest compiled JavaScript -->
+    @*<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>*@
+
+
+    <link href="~/immerse/web/fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="~/immerse/web/fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
+    <link href="~/immerse/web/fonts.googleapis.com/css?family=Sintony:400,700&amp;subset=latin-ext" rel="stylesheet">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <!-- banner -->
+    <div>
+
+        <div class="w3_bandwn">
+            <div class="container">
+                <div class="col-md-3 w3_l">
+                    <i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@rytesoftcompany.net">info@rytesoftcompany.net</a>
+                </div>
+                <div class="col-md-6 w3_c">
+                    <i class="fa fa-phone" aria-hidden="true"></i> +2348062667809
+                </div>
+                <div class="col-md-3 w3_r">
+                    <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <h3><a class="navbar-brand" href="@Url.Action("LandingPage", "Home")">BUCKETT</a></h3>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        @*<li><a href="#index.html" class="page-scroll">HOME</a></li>*@
+
+                       
+                        <li><a href="@Url.Action("Index", "ClientDetails")">CLIENT</a></li>
+                        <li><a href="@Url.Action("Index", "CompanyTokens")">TOKEN</a></li>
+                        <li><a href="@Url.Action("Index", "LaundryManagers")">LAUNDRY</a></li>
+                        <li><a href="@Url.Action("Index", "LaundryPayments")">PAYMENT</a></li>
+                        <li><a href="@Url.Action("Index", "WashWorkFlows")">ACTIVITY</a></li>
+                       
+                            <li><a href="@Url.Action("Index", "Admin")">ADMIN</a></li>
+                        
+                        @*<form class="navbar-form navbar-left">
+                <div class="w3l_frm">
+                    <form action="#" method="post">
+                        <button type="submit"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></button>
+                        <input type="text" name="search" placeholder="Search" required="">
+                    </form>
+                </div>
+            </form>*@
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+        <div class="container body-content">
+            @RenderBody()
+        </div>
+    </div>
+
+    <!-- footer -->
+    <div class="footer" id="footer">
+        <div class="container">
+            <div class="list">
+                <div class="col-md-3 wthree_fl">
+                    <a href="#">BUCKETT</a>
+                </div>
+
+                <div class="col-md-6 wthree_fc">
+                    <h6> RYTESOFT COMPANY </h6>
+                    <h6> IKOSI, LAGOS </h6>
+                    <h6> NIGERIA </h6>
+                </div>
+
+                <div class="col-md-3 wthree_fr">
+                    <h6>+2348062667809</h6>
+                    <h6><a href="mailto:info@rytesoftcompany.net">info@rytesoftcompany.net</a></h6>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- //footer -->
+    <div class="copyright">
+        <div class="container">
+            <p>© @DateTime.Now.Year Bucket. All rights reserved | Powered by <a href="http://rytesoftcompany.com">RYTESOFT COMPANY</a></p>
+        </div>
+    </div>
+
+    <script src="~/immerse/web/js/jquery.min.js"></script>
+    <script src="~/immerse/web/js/jquery.easing.min.js"></script>
+    <script src="~/immerse/web/js/move-top.js"></script>
+    <script src="~/immerse/web/js/bootstrap.min.js"></script>
+    <script src="~/immerse/web/js/grayscale.js"></script>
+    <script src="~/immerse/web/js/SmoothScroll.min.js"></script>
+    <!-- flexSlider -->
+    <script src="~/immerse/web/js/owl.carousel.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#owl-demo").owlCarousel({
+                items: 2,
+                itemsDesktop: [800, 2],
+                itemsDesktopSmall: [414, 1],
+                lazyLoad: true,
+                autoPlay: true,
+                navigation: true,
+
+                navigationText: false,
+                pagination: true,
+
+            });
+
+        });
+    </script>
+
+    <!-- //flexSlider -->
+    <!-- /gallery -->
+    <script src="~/immerse/web/js/jquery.tools.min.js"></script>
+    <script src="~/immerse/web/js/jquery.mobile.custom.min.js"></script>
+    <script src="~/immerse/web/js/jquery.cm-overlay.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('.cm-overlay').cmOverlay();
+        });
+    </script>
+    <!-- //gallery -->
+    <!-- Move-to-top-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var defaults = {
+                containerID: 'toTop', // fading element id
+                containerHoverID: 'toTopHover', // fading element hover id
+                scrollSpeed: 1200,
+                easingType: 'linear'
+            };
+            $().UItoTop({ easingType: 'easeOutQuart' });
+        });
+    </script>
+    <!--/Move-to-top-->
+
+    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+    @RenderSection("scripts", required: false)
+</body>
+</html>

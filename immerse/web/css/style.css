@@ -221,6 +221,11 @@ input[type="text"] {
     border-top: 0;
 	width:80%;
 }
+/*input,
+select,
+textarea {
+    max-width: 280px;
+}*/
 .w3l_banner {
     background: url(../images/baner.jpg) 0px 0px no-repeat;
     background-size: cover;

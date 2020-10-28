@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WebBucketApp.Models;
+using WebBucketApp.ViewModels;
 
 namespace WebBucketApp.Controllers
 {
@@ -49,7 +50,47 @@ namespace WebBucketApp.Controllers
                 _userManager = value;
             }
         }
+        public async Task<ActionResult> IndexPage()
+        {
+            var userId = User.Identity.GetUserId();
+            var user = await UserManager.FindByIdAsync(userId);
+            return View(user);
+        }
 
+        // GET: /Manage/Edit
+        public async Task<ActionResult> Edit()
+        {
+            var userId = User.Identity.GetUserId();
+            var user = await UserManager.FindByIdAsync(userId);
+            var model = new EditUserViewModel
+            {
+                Email = user.Email,
+                TrxnDate = user.TrxnDate,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Address = user.Address,
+                CompToken=user.CompToken,
+                CompanyTokenId=user.CompanyTokenId,
+                
+            };
+            return View(model);
+        }
+        // POST: Manage/Edit/
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost, ActionName("Edit")]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditPost()
+        {
+            var userId = User.Identity.GetUserId();
+            var userToUpdate = await UserManager.FindByIdAsync(userId);
+            if (TryUpdateModel(userToUpdate, "", new string[] {"FirstName","LastName","TrxnDate","Address","CompToken","CompanyTokenId" }))
+            {
+                await UserManager.UpdateAsync(userToUpdate);
+                return RedirectToAction("Index");
+            }
+            return View();
+        }
         //
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
