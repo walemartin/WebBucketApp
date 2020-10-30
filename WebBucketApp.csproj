@@ -186,20 +186,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\App_Start.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Context\DbContextLocal.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\ClientDetailsController.cs" />
     <Compile Include="Controllers\CompanyTokensController.cs" />
-    <Compile Include="Controllers\ForumController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImageDirsController.cs" />
     <Compile Include="Controllers\LaundryManagersController.cs" />
@@ -212,12 +209,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Mapper\ForumMap.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\ClientDetail.cs" />
     <Compile Include="Models\CompanyToken.cs" />
-    <Compile Include="Models\Forum.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LaundryManager.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -388,9 +383,6 @@
     <Content Include="Views\WashWorkFlows\Edit.cshtml" />
     <Content Include="Views\WashWorkFlows\Index.cshtml" />
     <Content Include="Views\Shared\_PartialConsole.cshtml" />
-    <Content Include="Views\Shared\Index.cshtml" />
-    <Content Include="Views\Forum\New.cshtml" />
-    <Content Include="Views\Forum\AddReturn.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
     <Content Include="Views\Account\LicenseAdmin.cshtml" />
   </ItemGroup>
