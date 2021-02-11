@@ -1,0 +1,77 @@
+﻿@model WebBucketApp.Models.Sales
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutFront.cshtml";
+}
+
+<div style="background-color:gold;">
+    <h2>Details</h2>
+
+    <div>
+        <h4>Sales</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Region)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Region)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Person)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Person)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Item)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Item)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Units)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Units)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UnitCost)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UnitCost)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Total)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Total)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.AddedOn)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.AddedOn)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>

@@ -6,22 +6,102 @@
 
 
 <h2>@ViewBag.Title</h2>
-<div class="container">
+
+<div class="jumbotron">
     <div class="row">
-       
+
+        <div class="col-md-4">
+            <a href="@Url.Action("ClientIndex", "ClientDetails")" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h3 class="mb-1" style="color:darkblue">CLIENTS</h3>
+                    @*<small class="text-muted">3 days ago</small>*@
+                </div>
+                <p class="mb-1"></p>
+                <small class="text-muted"></small>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="@Url.Action("Index", "RolesAdmin")" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h3 class="mb-1" style="color:darkblue">USER ROLES</h3>
+                    @*<small class="text-muted">3 days ago</small>*@
+                </div>
+                <p class="mb-1"></p>
+                <small class="text-muted"></small>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="@Url.Action("Index", "UsersAdmin")" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h3 class="mb-1" style="color:darkblue">USER</h3>
+                    @*<small class="text-muted">3 days ago</small>*@
+                </div>
+                <p class="mb-1"></p>
+                <small class="text-muted"></small>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+
+            <a href="@Url.Action("Index", "CompanyTokens")" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h3 class="mb-1" style="color:darkblue">LICENSES</h3>
+                    @*<small class="text-muted">3 days ago</small>*@
+                </div>
+                <p class="mb-1"></p>
+                <small class="text-muted"></small>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="@Url.Action("ClientIndex", "ClientDetails")" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h3 class="mb-1" style="color:darkblue">INDEX CLIENT</h3>
+                    @*<small class="text-muted">3 days ago</small>*@
+                </div>
+                <p class="mb-1"></p>
+                <small class="text-muted"></small>
+            </a>
+        </div>
+
+    
+
+
+    <div class="col-md-4">
+        <a href="@Url.Action("Index", "LaundryManagers")" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+                <h3 class="mb-1" style="color:darkblue">LAUNDRY MANAGER</h3>
+                @*<small class="text-muted">3 days ago</small>*@
+            </div>
+            <p class="mb-1"></p>
+            <small class="text-muted"></small>
+        </a>
     </div>
-    <div class="row">
-        @Html.ActionLink("Manage Roles", "Index", "RolesAdmin")
+    <div class="col-md-4">
+        <a href="@Url.Action("Index", "WashWorkFlows")" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+                <h3 class="mb-1" style="color:darkblue">WORK FLOW</h3>
+                @*<small class="text-muted">3 days ago</small>*@
+            </div>
+            <p class="mb-1"></p>
+            <small class="text-muted"></small>
+        </a>
     </div>
-    <div class="row">
-        @Html.ActionLink("Manage Users", "Index", "UsersAdmin")
+
+    <div class="col-md-4">
+        <a href="@Url.Action("Index", "LaundryPayments")" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+                <h3 class="mb-1" style="color:darkblue">PAYMENTS</h3>
+                @*<small class="text-muted">3 days ago</small>*@
+            </div>
+            <p class="mb-1"></p>
+            <small class="text-muted"></small>
+        </a>
+    </div>
     </div>
 </div>
-<ul>
-    <li><a href="@Url.Action("Index", "ClientDetails")">CLIENT</a></li>
-    <li><a href="@Url.Action("Index", "CompanyTokens")">TOKEN</a></li>
-    <li><a href="@Url.Action("Index", "LaundryManagers")">LAUNDRY MANAGER</a></li>
-    <li><a href="@Url.Action("Index", "LaundryPayments")">PAYMENT</a></li>
-    <li><a href="@Url.Action("Index", "WashWorkFlows")">ACTIVITY</a></li>
-</ul>
+
+
 

@@ -8,10 +8,31 @@
 
 <h2>Index</h2>
 
+<div class="form-horizontal jumbotron">
+
+    <h4>Search by Client ID / Name / Phone Number:  </h4>
+    <hr />
+
+    <div class="input-group" style="align-content:center">
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span>
+        </span>
+        @Html.TextBox("Search", "", new { @class = "form-control", @required = "required", placeholder = "Client ID, Phone No., Full Name" })
+        <button type="submit" class="btn btn-danger" id="search"><i class="glyphicon glyphicon-search"></i></button>
+    </div>
+
+
+
+</div>
+<div id="results">
+
+</div>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
 </p>
-<table class="table">
+<table class="table table-hover table-responsive table-striped">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.ClientNo)
@@ -92,6 +113,7 @@
                 @Html.DisplayFor(modelItem => item.TrxnDate)
             </td>
             <td>
+                @Html.ActionLink("Payment", "Create", "LaundryPayments", new { id = item.ID }, null) |
                 @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
                 @Html.ActionLink("Details", "Details", new { id = item.ID }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.ID })
@@ -100,3 +122,27 @@
     }
 
 </table>
+
+
+<script>
+
+
+    $(function () {
+        $('#search').click(function () {
+            var valueSearch = $('#Search').val();
+            Search(valueSearch);
+        });
+    });
+    function Search(valueSearch) {
+        $.ajax({
+            type: "POST",
+            url: "/LaundryManagers/ClientIndex?Search" + valueSearch,
+            async: false,
+            data: { Search: valueSearch },
+            success: function (data) {
+
+                $("#results").html(data);
+            }
+        });
+    }
+</script>

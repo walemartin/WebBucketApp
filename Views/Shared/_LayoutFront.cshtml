@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <meta name="keywords" content="Buckett" />
-
+    <link rel="icon" type="image/png" sizes="32x32" href="~/favicon-32x32.png">
+    <link rel="manifest" href="~/site.webmanifest">
+    
     <link href="~/immerse/web/css/bootstrap.min.css" rel="stylesheet" media="all" />
     <link href="~/immerse/web/css/font-awesome.min.css" rel="stylesheet" media="all" />
 
@@ -17,7 +19,7 @@
 
     <link href="~/immerse/web/css/style.css" rel="stylesheet" media="all" />
 
-    
+
     <link href="~/immerse/web/fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link href="~/immerse/web/fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
     <link href="~/immerse/web/fonts.googleapis.com/css?family=Sintony:400,700&amp;subset=latin-ext" rel="stylesheet">
@@ -33,7 +35,10 @@
                 </div>
                 <div class="col-md-6 w3_c">
                     <i class="fa fa-phone" aria-hidden="true"></i> +234 806 266 7809
+                    <br />
+                    @Html.Partial("_LoginPartial")
                 </div>
+
                 <div class="col-md-3 w3_r">
                     <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
                     <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
@@ -43,6 +48,7 @@
                 <div class="clearfix"></div>
             </div>
         </div>
+       
         <nav class="navbar navbar-default">
             <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
@@ -65,22 +71,28 @@
                         <li><a href="#gallery" class="page-scroll">GALLERY</a></li>
                         <li><a href="#testimonials" class="page-scroll">TESTIMONIALS</a></li>
                         <li><a href="#contact" class="page-scroll">CONTACT</a></li>
-                        <li><a href="@Url.Action("Index", "ClientDetails")">MY ACCOUNT</a></li>
-                        
+                        @if (Request.IsAuthenticated && User.IsInRole("Company"))
+                        {
+                            <li><a href="@Url.Action("Dashboard", "Home")">DASHBOARD</a></li>
+
+                        }
+                        @*<li><a href="@Url.Action("Index", "Admin")">ADMIN</a></li>*@
                         @if (Request.IsAuthenticated && User.IsInRole("Admin"))
                         {
+
                             <li><a href="@Url.Action("Index", "Admin")">ADMIN</a></li>
                         }
-                        @*<form class="navbar-form navbar-left">
-                            <div class="w3l_frm">
-                                <form action="#" method="post">
-                                    <button type="submit"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></button>
-                                    <input type="text" name="search" placeholder="Search" required="">
-                                </form>
-                            </div>
-                        </form>*@
+                    </ul>
+                    @*<form class="navbar-form navbar-left">
+                        <div class="w3l_frm">
+                            <form action="#" method="post">
+                                <button type="submit"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></button>
+                                <input type="text" name="search" placeholder="Search" required="">
+                            </form>
+                        </div>
+                    </form>*@
 
-</div><!-- /.navbar-collapse -->
+                </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
         @RenderBody()
@@ -104,7 +116,7 @@
                             <div class="modal-body">
 
                                 <img src="~/immerse/web/images/modal.jpg" class="img-responsive" alt="tfg">
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                                <p>We are a bespoke laundry service which brings specialist laundry to your doorstep. Whether at home or at work, our collection and delivery service will take care of your everyday laundry needs.</p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -123,17 +135,17 @@
             <div class="container">
                 <h3>About Us</h3>
                 <div class="tittle_head_w3layouts">
-                    <h4>Powerful Features</h4>
+                    <h4>Premium Quality</h4>
 
-                    <P>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</P>
+                    <P>World class service, Leading European cleaning equipments, Environmentally friendly solvent, Highly trained and experienced staff.</P>
                 </div>
                 <div class="inner_sec_info_agileits_w3">
                     <!-- <div class="border1"> -->
                     <div class="w3_banup">
                         <div class="col-md-4 w3_ret">
                             <div class="col-md-10 w3_txt">
-                                <h4>Wash Cycle</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas quis neque libero.</p>
+                                <h4>Save Time</h4>
+                                <p>Premium service at affordable prices, Flexible packages at different prices to fit your lifestyle, Corporate concierge service</p>
                             </div>
                             <div class="col-md-2 w3ls_ic">
                                 <i class="fa fa-comment-o" aria-hidden="true"></i>
@@ -144,7 +156,7 @@
                             <div class="col-md-10 w3_txt">
 
                                 <h4>Tumble Drying</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas quis neque libero.</p>
+                                <p>dry (washed clothes) by spinning them in hot air inside a dryer.</p>
                             </div>
                             <div class="col-md-2 w3ls_ic">
                                 <i class="fa fa-microphone" aria-hidden="true"></i>
@@ -154,7 +166,7 @@
                             <div class="col-md-10 w3_txt">
 
                                 <h4>Customize Quickly</h4>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas quis neque libero.</p>
+                                <p>Laundry processes include washing (usually with water containing detergents or other chemicals), agitation, rinsing, drying, pressing (ironing), and folding.</p>
                             </div>
                             <div class="col-md-2 w3ls_ic">
                                 <i class="fa fa-cubes" aria-hidden="true"></i>
@@ -173,7 +185,7 @@
                             </div>
                             <div class="col-md-10 w3_txt">
                                 <h4>Sorting</h4>
-                                <p class="move">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas quis neque libero</p>
+                                <p class="move"></p>
                             </div>
                             <div class="clearfix"></div>
 
@@ -182,7 +194,7 @@
                             </div>
                             <div class="col-md-10 w3_txt">
                                 <h4>Mildew Effect</h4>
-                                <p class="move">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas quis neque libero.</p>
+                                <p class="move"></p>
                             </div>
                             <div class="clearfix"></div>
 
@@ -191,7 +203,7 @@
                             </div>
                             <div class="col-md-10 w3_txt">
                                 <h4>Crocking.</h4>
-                                <p class="move">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas quis neque libero.</p>
+                                <p class="move"></p>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -204,8 +216,7 @@
         </div>
     </div>
     <!-- //features -->
-    </div>
-    </div>
+   
     <!-- Order Form-->
     <div class="w3ls_frmrt">
         <div class="container">
@@ -216,23 +227,25 @@
                         <label><i class="fa fa-user" aria-hidden="true"></i> Name</label>
                         <input type="text" placeholder="Name" required="">
                     </div>
+                    <div class="col-md-3 form-time-w3layouts">
+                        <label><i class="fa fa-phone" aria-hidden="true"></i> Phone Number</label>
+                        <input type="text" placeholder="Phone No." required="">
+                    </div>
+                    <div class="col-md-3 form-time-w3layouts">
+                        <label><i class="fa fa-map-marker" aria-hidden="true"></i>Location</label>
+                        <input type="text" placeholder="Location" required="">
+                    </div>
                     <div class="col-md-3 form-date-w3-agileits">
-                        <label><i class="fa fa-map-marker" aria-hidden="true"></i>No.Of.Pairs</label>
-                        <select class="form-control">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
+                        <label><i class="fa fa-cloud" aria-hidden="true"></i>No.Of.Pairs</label>
+                        <input type="number" placeholder="No.Of.Pairs" required="">
                     </div>
                     <div class="col-md-3 form-left-agileits-w3layouts ">
-                        <label><i class="fa fa-home" aria-hidden="true"></i> Category</label>
+                        <label><i class="fa fa-cart-plus" aria-hidden="true"></i> Category</label>
                         <select class="form-control">
-                            <option>Wash Cycle</option>
-                            <option>Tumble Drying</option>
-                            <option>Sorting</option>
-                            <option>Crocking</option>
+                            <option>Wash only</option>
+                            <option>Wash and Iron</option>
+                            <option>Wash,Starch and Iron</option>
+                            <option>Iron only</option>
                         </select>
                     </div>
                     <div class="col-md-3 form-left-agileits-submit">
@@ -252,21 +265,21 @@
                 <div class="wthree_rt">
                     <i class="fa fa-ship" aria-hidden="true"></i>
                     <h4>Competetive Pricing</h4>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting of the in industry.</p>
+                    <p></p>
                 </div>
             </div>
             <div class="col-md-4 hhh">
                 <div class="wthree_rt">
                     <i class="fa fa-space-shuttle" aria-hidden="true"></i>
                     <h4>Customizable Service</h4>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting of the in industry.</p>
+                    <p></p>
                 </div>
             </div>
             <div class="col-md-4 hhh">
                 <div class="wthree_rt">
                     <i class="fa fa-sitemap" aria-hidden="true"></i>
                     <h4>Free Pickup& Delivery</h4>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting of the in industry.</p>
+                    <p></p>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -275,13 +288,13 @@
                     <div class="agile_ser">
                         <i class="fa fa-bar-chart" aria-hidden="true"></i>
                         <h4>Personal laundress</h4>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting of the in industry.</p>
+                        <p></p>
                     </div>
                 </div>
                 <div class="col-md-8 W3ls_serv">
                     <div class="agile_ser ">
                         <div class="col-md-6 wthree_l">
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting of the in industry.</p>
+                            <p></p>
                         </div>
                         <div class="col-md-6 wthree_rts">
                             <img src="~/immerse/web/images/s1.jpg" class="img-responsive" alt="">
@@ -516,7 +529,7 @@
 
                 <div class="col-md-6 wthree_fc">
                     <h6> RYTESOFT COMPANY </h6>
-                    <h6> IKOSI, LAGOS </h6>
+                    <h6> KETU, LAGOS </h6>
                     <h6> NIGERIA </h6>
                 </div>
 
@@ -532,7 +545,7 @@
     <!-- //footer -->
     <div class="copyright">
         <div class="container">
-            <p>© @DateTime.Now.Year Bucket. All rights reserved | Powered by <a href="http://rytesoftcompany.com">RYTESOFT COMPANY</a></p>
+            <p>© @DateTime.Now.Year BUCKETT. All rights reserved | Powered by <a href="http://rytesoftcompany.net">RYTESOFT COMPANY</a></p>
         </div>
     </div>
    

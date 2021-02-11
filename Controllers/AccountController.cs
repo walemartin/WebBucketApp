@@ -76,7 +76,7 @@ namespace WebBucketApp.Controllers
             //add code to check if the user'e email is confirmed
             var userid = UserManager.FindByEmail(model.Email);
             //add code to check if the user'e license has not expired or is confirmed
-            var d = db.CompanyTokens.Where(a => a.Email==userid.Email && a.ExpirationDate<=a.TrxnDate).FirstOrDefault();
+            var d = db.CompanyTokens.Where(a => a.Email == userid.Email && DateTime.Today <= a.ExpirationDate).FirstOrDefault();
             if (d != null)
             {
                 if (!UserManager.IsEmailConfirmed(userid.Id))

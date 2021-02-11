@@ -12,6 +12,7 @@ using WebBucketApp.ViewModels;
 
 namespace WebBucketApp.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UsersAdminController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -133,6 +134,7 @@ namespace WebBucketApp.Controllers
                 return HttpNotFound();
             }
             var userRoles = await UserManager.GetRolesAsync(user.Id);
+            ViewBag.CompanyTokenId = new SelectList(db.CompanyTokens, "ID", "Branch", user.CompanyTokenId);
             return View(new EditUserViewModel()
             {
                 Id = user.Id,
@@ -140,8 +142,8 @@ namespace WebBucketApp.Controllers
                 TrxnDate = user.TrxnDate,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                CompToken=user.CompToken,
-                CompanyTokenId=user.CompanyTokenId,
+                //CompToken=user.CompToken,
+                //CompanyTokenId=user.CompanyTokenId,
                 Address = user.Address,
                 RolesList = RoleManager.Roles.ToList().Select(x => new SelectListItem()
                 {
@@ -167,11 +169,12 @@ namespace WebBucketApp.Controllers
                 }
                 user.TrxnDate = editUser.TrxnDate;
                 user.PhoneNo = editUser.PhoneNo;
-                user.CompToken = editUser.CompToken;
-                user.CompanyTokenId = editUser.CompanyTokenId;
+                //user.CompToken = editUser.CompToken;
+                //user.CompanyTokenId = editUser.CompanyTokenId;
                 user.FirstName = editUser.FirstName;
                 user.LastName = editUser.LastName;
                 user.Address = editUser.Address;
+                ViewBag.CompanyTokenId = new SelectList(db.CompanyTokens, "ID", "Branch", user.CompanyTokenId);
                 var userRoles = await UserManager.GetRolesAsync(user.Id);
                 selectedRole = selectedRole ?? new string[] { };
                 var result = await UserManager.AddToRolesAsync(user.Id,

@@ -1,6 +1,6 @@
 ﻿@model WebBucketApp.Models.RegisterViewModel
 @{
-    
+    ViewBag.Title = "User Registration";
     Layout = "~/Views/Shared/_PartialConsole.cshtml";
 }
 
@@ -9,7 +9,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>RegisterViewModel</h4>
+        <h4>User Registration</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">

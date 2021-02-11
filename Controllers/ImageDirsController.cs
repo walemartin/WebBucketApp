@@ -12,6 +12,7 @@ using WebBucketApp.Models;
 
 namespace WebBucketApp.Controllers
 {
+    [Authorize]
     public class ImageDirsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

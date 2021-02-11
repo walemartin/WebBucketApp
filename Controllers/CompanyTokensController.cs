@@ -13,6 +13,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace WebBucketApp.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CompanyTokensController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

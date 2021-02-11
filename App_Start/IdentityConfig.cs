@@ -6,7 +6,6 @@ using System.Net.Mail;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
-using Fluent.Infrastructure.FluentStartup;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -21,10 +20,10 @@ namespace WebBucketApp
         public Task SendAsync(IdentityMessage message)
         {
             // Plug in your email service here to send an email.
-            return configOutlookAsync(message);
+            return ConfigOutlookAsync(message);
             //return Task.FromResult(0);
         }
-        private Task configOutlookAsync(IdentityMessage message)
+        private Task ConfigOutlookAsync(IdentityMessage message)
         {
             SmtpClient smtpClient = new SmtpClient("smtp.live.com", 587)
             {
@@ -98,7 +97,7 @@ namespace WebBucketApp
                 BodyFormat = "Your security code is {0}"
             });
             manager.EmailService = new EmailService();
-            manager.SmsService = new SmsService();
+            //manager.SmsService = new SmsService();
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {
@@ -144,6 +143,8 @@ namespace WebBucketApp
         public System.Data.Entity.DbSet<WebBucketApp.Models.LaundryPayment> LaundryPayments { get; set; }
 
         public System.Data.Entity.DbSet<WebBucketApp.Models.WashWorkFlow> WashWorkFlows { get; set; }
+
+        public System.Data.Entity.DbSet<WebBucketApp.Models.Sales> Sales { get; set; }
     }
     // Configure the application sign-in manager which is used in this application.
     public class ApplicationSignInManager : SignInManager<ApplicationUser, string>
@@ -211,7 +212,7 @@ namespace WebBucketApp
                     FirstName="Olawale",
                     LastName="Olasupo",
                     TrxnDate=DateTime.Now,
-                    CompToken="RSC17051988",
+                    CompToken= "A49349",
                     CompanyTokenId=1,
                     PhoneNo="08062667809",
                     Address="1, Salawe Avenue, Off Love Street, Ketu, Lagos",

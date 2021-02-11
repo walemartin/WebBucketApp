@@ -10,9 +10,11 @@ using System.Web.Mvc;
 using WebBucketApp;
 using WebBucketApp.Models;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
 
 namespace WebBucketApp.Controllers
 {
+    [Authorize(Roles = "Admin,Company")]
     public class WashWorkFlowsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -72,9 +74,27 @@ namespace WebBucketApp.Controllers
         }
 
         // GET: WashWorkFlows/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var fg = db.LaundryManagers.Find(id);
+            var userId = User.Identity.GetUserId();
+            var user = UserManager.FindById(userId);
+            WashWorkFlow ng = new WashWorkFlow()
+            {
+                ClientNo=fg.ClientNo,
+                Email=user.Email,
+                Branch=user.CompanyToken.Branch,
+                ContractNo=fg.ContractNo,
+            };
+            if (ng == null)
+            {
+                return HttpNotFound();
+            }
+            return View(ng);
         }
 
         // POST: WashWorkFlows/Create

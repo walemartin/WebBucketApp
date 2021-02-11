@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="utf-8">
     <meta name="keywords" content="Buckett, Laundry" />
-
+    <link rel="icon" type="image/png" sizes="32x32" href="~/favicon-32x32.png">
+    <link rel="manifest" href="~/site.webmanifest">
     <link href="~/immerse/web/css/bootstrap.min.css" rel="stylesheet" media="all" />
     <link href="~/immerse/web/css/font-awesome.min.css" rel="stylesheet" media="all" />
 
@@ -73,23 +74,34 @@
                     <ul class="nav navbar-nav">
                         @*<li><a href="#index.html" class="page-scroll">HOME</a></li>*@
 
-                       
-                        <li><a href="@Url.Action("Index", "ClientDetails")">CLIENT</a></li>
-                        <li><a href="@Url.Action("Index", "CompanyTokens")">TOKEN</a></li>
+
+                        <li><a href="@Url.Action("ClientIndex", "ClientDetails")">CLIENT</a></li>
+
                         <li><a href="@Url.Action("Index", "LaundryManagers")">LAUNDRY</a></li>
                         <li><a href="@Url.Action("Index", "LaundryPayments")">PAYMENT</a></li>
                         <li><a href="@Url.Action("Index", "WashWorkFlows")">ACTIVITY</a></li>
-                       
+                        @if (Request.IsAuthenticated && User.IsInRole("Company"))
+                        {
+                            <li><a href="@Url.Action("Dashboard", "Home")">DASHBOARD</a></li>
+
+                        }
+                        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li><a href="@Url.Action("Index", "CompanyTokens")">TOKEN</a></li>
+                        }
+                        @if (Request.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+
                             <li><a href="@Url.Action("Index", "Admin")">ADMIN</a></li>
-                        
+                        }
                         @*<form class="navbar-form navbar-left">
-                <div class="w3l_frm">
-                    <form action="#" method="post">
-                        <button type="submit"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></button>
-                        <input type="text" name="search" placeholder="Search" required="">
-                    </form>
-                </div>
-            </form>*@
+            <div class="w3l_frm">
+                <form action="#" method="post">
+                    <button type="submit"><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></button>
+                    <input type="text" name="search" placeholder="Search" required="">
+                </form>
+            </div>
+        </form>*@
                     </ul>
                     @Html.Partial("_LoginPartial")
                 </div><!-- /.navbar-collapse -->
@@ -110,7 +122,7 @@
 
                 <div class="col-md-6 wthree_fc">
                     <h6> RYTESOFT COMPANY </h6>
-                    <h6> IKOSI, LAGOS </h6>
+                    <h6> KETU, LAGOS </h6>
                     <h6> NIGERIA </h6>
                 </div>
 
@@ -126,7 +138,7 @@
     <!-- //footer -->
     <div class="copyright">
         <div class="container">
-            <p>© @DateTime.Now.Year Bucket. All rights reserved | Powered by <a href="http://rytesoftcompany.com">RYTESOFT COMPANY</a></p>
+            <p>© @DateTime.Now.Year BUCKETT. All rights reserved | Powered by <a href="http://rytesoftcompany.net">RYTESOFT COMPANY</a></p>
         </div>
     </div>
 

@@ -1,0 +1,14 @@
+﻿@model WebBucketApp.Models.ImportExcel
+@{
+    ViewBag.Title = "Console";
+    Layout = "~/Views/Shared/_LayoutFront.cshtml";
+}
+<div style="background-color:white;">
+    <h4>@ViewBag.Result</h4>
+    @using (Html.BeginForm("SheetUpload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.TextBoxFor(m => m.file, new { type = "file" })
+        <button id="submitButton" type="submit">Submit</button>
+        @Html.ValidationMessageFor(model => model.file)
+    }
+</div>

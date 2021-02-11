@@ -10,6 +10,14 @@ namespace WebBucketApp.Models
         public LaundryManager()
         {
             TrxnDate = DateTime.Now;
+            
+            Guid nv = new Guid();
+
+            ContractNo = nv.ToString();
+            ShirtNo = 0;
+            TrouserNo = 0;
+            JeanNo = 0;
+            AgbadaCompleteNo = 0;
         }
         public int ID { get; set; }
 
@@ -54,6 +62,11 @@ namespace WebBucketApp.Models
         public DateTime TrxnDate { get; set; }
 
     }
+    public static class Constantsx
+    {
+        public const string ProductImagePath = "~/PropertyImages/";
+        public const string ProductThumbnailPath = "~/PropertyImages/Thumbnails/";
+    }
     public class ImageDir
     {
         public int ID { get; set; }
@@ -85,7 +98,7 @@ namespace WebBucketApp.Models
         [Display(Name = "Received Amount")]
         public decimal ReceivedAmount { get; set; }
 
-        [Display(Name = "Expected Amount")]
+        [Display(Name = "Amount Due")]
         public decimal ExpectedAmount { get; set; }
 
         [Display(Name = "Created by")]
@@ -140,6 +153,6 @@ namespace WebBucketApp.Models
     }
     public enum WorkStatus
     {
-        Pending,Washed,Iron,Completed
+        Pending,Washed,starched,Ironed,Completed
     }
 }

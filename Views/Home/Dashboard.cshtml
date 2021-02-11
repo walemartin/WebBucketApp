@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_PartialConsole.cshtml";
+}
+<h2>Dashboard</h2>
+<div>
+    <h3>BUCKETT LAUNDRY MANAGEMENT</h3>
+    <p class="lead" style="color:darkblue">APPLICATION MODULES</p>
+    <p><a href="#" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+<br />
+<br />
+
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <a href="@Url.Action("Index", "ClientDetails")" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h3 class="mb-1" style="color:darkblue">CLIENTS</h3>
+                    @*<small class="text-muted">3 days ago</small>*@
+                </div>
+                <p class="mb-1"></p>
+                <small class="text-muted"></small>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+
+            <a href="@Url.Action("Index", "CompanyTokens")" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h3 class="mb-1" style="color:darkblue">LICENSES</h3>
+                    @*<small class="text-muted">3 days ago</small>*@
+                </div>
+                <p class="mb-1"></p>
+                <small class="text-muted"></small>
+            </a>
+        </div>
+       
+            <div class="col-md-4">
+                <a href="@Url.Action("Index", "LaundryManagers")" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h3 class="mb-1" style="color:darkblue">LAUNDRY</h3>
+                        @*<small class="text-muted">3 days ago</small>*@
+                    </div>
+                    <p class="mb-1"></p>
+                    <small class="text-muted"></small>
+                </a>
+            </div>
+       
+    </div>
+
+    <br />
+    <div class="row">
+        <div class="col-md-4">
+            <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h3 class="mb-1" style="color:darkblue">LEAD MANAGEMENT</h3>
+                    @*<small class="text-muted">3 days ago</small>*@
+                </div>
+                <p class="mb-1"></p>
+                <small class="text-muted"></small>
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a href="@Url.Action("Index", "WashWorkFlows")" class="list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-between">
+                    <h3 class="mb-1" style="color:darkblue">WORK FLOW</h3>
+                    @*<small class="text-muted">3 days ago</small>*@
+                </div>
+                <p class="mb-1"></p>
+                <small class="text-muted"></small>
+            </a>
+        </div>
+       
+            <div class="col-md-4">
+                <a href="@Url.Action("Index", "LaundryPayments")" class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h3 class="mb-1" style="color:darkblue">PAYMENTS</h3>
+                        @*<small class="text-muted">3 days ago</small>*@
+                    </div>
+                    <p class="mb-1"></p>
+                    <small class="text-muted"></small>
+                </a>
+            </div>
+       
+    </div>
+
+<br />
+<br />
+
