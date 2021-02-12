@@ -1,14 +1,95 @@
 ﻿@model WebBucketApp.Models.ImportExcel
 @{
-    ViewBag.Title = "Console";
-    Layout = "~/Views/Shared/_LayoutFront.cshtml";
+
+    Layout = "~/Views/Shared/_Lab.cshtml";
 }
-<div style="background-color:white;">
-    <h4>@ViewBag.Result</h4>
-    @using (Html.BeginForm("SheetUpload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        @Html.TextBoxFor(m => m.file, new { type = "file" })
-        <button id="submitButton" type="submit">Submit</button>
-        @Html.ValidationMessageFor(model => model.file)
+<style>
+    .cent {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
+</style>
+<div class="cent">
+
+
+    <div class="jumbotron">
+        <h4>@ViewBag.Result</h4>
+        @using (Html.BeginForm("SheetUpload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @*@Html.TextBoxFor(m => m.file, new { type = "file" })
+            @Html.TextBoxFor(model => model.file, new { @type = "file", @class = "input-file" })*@
+
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" id="file">
+        <label class="custom-file-label" for="file">Choose file</label>
+    </div>
+            <button id="submitButton" type="submit" class="btn btn-primary">Upload</button>
+            @Html.ValidationMessageFor(model => model.file)
+        }
+    </div>
+
 </div>
+
+@*<table>
+    <tr>
+        <td>Name:</td>
+        <td><input type="text" id="fileName" /></td>
+    </tr>
+    <tr>
+        <td>File:</td>
+        <td><input type="file" id="file" /></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><input type="button" id="btnUpload" value="Upload" /></td>
+    </tr>
+    <tr>
+        <td colspan="2"><progress id="fileProgress" style="display: none"></progress></td>
+    </tr>
+</table>
+<hr />
+<span id="lblMessage" style="color: Green"></span>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $("body").on("click", "#btnUpload", function () {
+        var formData = new FormData();
+        formData.append("fileName", $("#fileName").val());
+        formData.append("file", $("#file")[0].files[0]);
+        $.ajax({
+            url: '/api/FileAPI/UploadFiles',
+            type: 'POST',
+            data: formData,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success: function (fileName) {
+                $("#fileProgress").hide();
+                $("#lblMessage").html("<b>" + fileName + "</b> has been uploaded.");
+            },
+            xhr: function () {
+                var fileXhr = $.ajaxSettings.xhr();
+                if (fileXhr.upload) {
+                    $("progress").show();
+                    fileXhr.upload.addEventListener("progress", function (e) {
+                        if (e.lengthComputable) {
+                            $("#fileProgress").attr({
+                                value: e.loaded,
+                                max: e.total
+                            });
+                        }
+                    }, false);
+                }
+                return fileXhr;
+            }
+        });
+    });
+</script>
+
+<script>
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>*@ 

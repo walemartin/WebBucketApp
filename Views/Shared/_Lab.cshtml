@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Rainbow</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+</head>
+<body>
+
+   
+    <div class="container body-content">
+        <div class="container" style="margin-top:30px">
+
+            <img src="~/Content/WhatsApp Image 2021-02-10 at 10.51.58 AM.jpeg" class="img-fluid mx-auto d-block" width="150" />
+            <h5 class="text-center">HARLEY AND RAINBOW SPECIALIZED LABORATORIES</h5>
+
+            
+
+            <ul class="nav justify-content-center" style="background-color:lightgray;">
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("SheetUpload", "Home")">Upload</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("SheetSearchById", "Home")">Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("LabReports", "Home")">List</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "UploadAuditTrails")">Audit Uploads</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index", "FetchARecordAuditTrails")">Inquiry</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Report</a>
+                </li>
+            </ul>
+
+
+        </div>
+        <hr />
+        @RenderBody()
+        <hr />
+        <footer>
+            <p class="text-center">&copy; @DateTime.Now.Year - HARLEY AND RAINBOW</p>
+        </footer>
+    </div>
+</body>
+</html>

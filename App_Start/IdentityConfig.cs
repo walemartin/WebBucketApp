@@ -145,6 +145,10 @@ namespace WebBucketApp
         public System.Data.Entity.DbSet<WebBucketApp.Models.WashWorkFlow> WashWorkFlows { get; set; }
 
         public System.Data.Entity.DbSet<WebBucketApp.Models.Sales> Sales { get; set; }
+
+        public System.Data.Entity.DbSet<WebBucketApp.Models.FetchARecordAuditTrail> FetchARecordAuditTrails { get; set; }
+
+        public System.Data.Entity.DbSet<WebBucketApp.Models.UploadAuditTrail> UploadAuditTrails { get; set; }
     }
     // Configure the application sign-in manager which is used in this application.
     public class ApplicationSignInManager : SignInManager<ApplicationUser, string>

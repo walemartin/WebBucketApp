@@ -32,6 +32,25 @@ namespace WebBucketApp.Models
         public string Total { get; set; }
         public string AddedOn { get; set; }
     }
+    public class FetchARecordAuditTrail
+    {
+        public int ID { get; set; }
+        public string ClientPhone { get; set; }
+        public string ClientEmail { get; set; }
+        public string CreatedBy { get; set; }
+        public string UserIPAddress { get; set; }
+        public DateTime PostedDate { get; set; }
+
+    }
+    public class UploadAuditTrail
+    {
+        public int ID { get; set; }
+        public string file { get; set; }
+        public string CreatedBy { get; set; }
+        public string UserIPAddress { get; set; }
+        public DateTime PostedDate { get; set; }
+
+    }
     public class FileExt : ValidationAttribute
     {
         public string Allow;

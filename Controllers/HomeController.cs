@@ -1,9 +1,18 @@
-﻿using System;
+﻿using Google.Apis.Auth.OAuth2;
+using Google.Apis.Drive.v3;
+using Google.Apis.Services;
+using Google.Apis.Sheets.v4;
+using Google.Apis.Sheets.v4.Data;
+using Google.Apis.Util.Store;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.OleDb;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WebBucketApp.Models;
@@ -12,6 +21,7 @@ namespace WebBucketApp.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
             return View();
@@ -104,16 +114,84 @@ namespace WebBucketApp.Controllers
             }
             return DataSales;
         }
+        
+
+        public ActionResult GoogleSheetCall()
+        {
+            // If modifying these scopes, delete your previously saved credentials
+            // at ~/.credentials/sheets.googleapis.com-dotnet-quickstart.json
+             string[] Scopes = { SheetsService.Scope.SpreadsheetsReadonly };
+             string ApplicationName = "Google Sheets API .NET Quickstart";
+
+           
+                UserCredential credential;
+
+                using (var stream =
+                    new FileStream(Server.MapPath(@"~/credentials.json"), FileMode.Open, FileAccess.Read))
+                {
+                    // The file token.json stores the user's access and refresh tokens, and is created
+                    // automatically when the authorization flow completes for the first time.
+                    string credPath = Server.MapPath(@"~/token.json");
+                    credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                        GoogleClientSecrets.Load(stream).Secrets,
+                        Scopes,
+                        "user",
+                        CancellationToken.None,
+                        new FileDataStore(credPath, true)).Result;
+                    Response.Write("Credential file saved to: " + credPath);
+                }
+
+                // Create Google Sheets API service.
+                var service = new SheetsService(new BaseClientService.Initializer()
+                {
+                    HttpClientInitializer = credential,
+                    ApplicationName = ApplicationName,
+                });
+
+                // Define request parameters.
+                String spreadsheetId = "1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms";
+                String range = "Class Data!A2:E";
+                SpreadsheetsResource.ValuesResource.GetRequest request =
+                        service.Spreadsheets.Values.Get(spreadsheetId, range);
+
+                // Prints the names and majors of students in a sample spreadsheet:
+                // https://docs.google.com/spreadsheets/d/1BxiMVs0XRA5nFMdKvBdBZjgmUUqptlbs74OgvE2upms/edit
+                ValueRange response = request.Execute();
+            //IList<IList<Object>> values = response.Values;
+            return View();
+                
+        }
+      
+        public ActionResult SheetSearchById()
+        {
+            return View();
+        }
+        public ActionResult LabRepots()
+        {
+            return View();
+        }
         public ActionResult SheetUpload()
         {
             return View();
         }
         [HttpPost]
-        public ActionResult SheetUpload(ImportExcel importExcel)
+        public async Task<ActionResult> SheetUpload(ImportExcel importExcel, UploadAuditTrail uploadAuditTrail)
         {
             if (ModelState.IsValid)
             {
                 string path = Server.MapPath("~/Upload/" + importExcel.file.FileName);
+                uploadAuditTrail.file = importExcel.file.FileName;
+                uploadAuditTrail.PostedDate = DateTime.Now;
+                uploadAuditTrail.UserIPAddress = Request.UserHostAddress;
+                uploadAuditTrail.CreatedBy = User.Identity.Name;
+                db.UploadAuditTrails.Add(uploadAuditTrail);
+                await db.SaveChangesAsync();
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                //Fetch the File Name.
+               
                 importExcel.file.SaveAs(path);
 
                 string excelConnectionString = @"Provider='Microsoft.ACE.OLEDB.12.0';Data Source='" + path + "';Extended Properties='Excel 12.0 Xml;IMEX=1'";
