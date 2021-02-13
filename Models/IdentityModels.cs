@@ -58,6 +58,7 @@ namespace WebBucketApp.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext,Migrations.Configuration>());
         }
 
         public static ApplicationDbContext Create()

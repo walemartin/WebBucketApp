@@ -5,59 +5,81 @@
 
 }
 
-<nav class="navbar navbar-light bg-light">
-    <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-</nav>
+@*<nav class="navbar navbar-light bg-light">
+        <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </nav>*@
 
-@*<link href="~/Content/LABmodal.css" rel="stylesheet" />
-<div class="jumbotron">
-    <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Click to Spool result</button>
+
+@using (Ajax.BeginForm("FetchSales", "Home", new AjaxOptions { HttpMethod = "GET", InsertionMode = InsertionMode.Replace, UpdateTargetId = "SearchResults", LoadingElementId = "divloading" }))
+{
+    <h1>Search</h1>
+    <input type="text" placeholder="Search report" id="SearchRep" />
+    @*<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>*@
+
+    @Ajax.ActionLink("Search", "About", "Home", new AjaxOptions()
+{
+    HttpMethod = "GET",
+    UpdateTargetId = "SearchResults",
+    InsertionMode = InsertionMode.Replace,
+    LoadingElementId = "divloading"
+})
+
+}
+<div id="divloading" style="display:none;">
+    <img src="~/Ellipsis-1s-200px.gif" />
 </div>
 
+<div id="SearchResults"></div>
 
-<div id="id01" class="modal">
-    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-    @using (Html.BeginForm("SheetSearchById", "Home", FormMethod.Post, new { @class="modal-content" }))
-    {
-        
-            <div class="container">
-                <h1>Search</h1>
-                
-                <hr>
-                <label for="name"><b>Telephone</b></label>
-                <input type="text" placeholder="Enter Phone Number" name="name">
-
-                <label for="name"><b>Full name</b></label>
-                <input type="text" placeholder="Enter Full Name" name="name">
-
-                
-
-               
-
-               
-
-                <div class="clearfix">
-                    <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-                    <button type="submit" class="signupbtn">Fetch Data</button>
-                </div>
-            </div>
-       
-    }
+@*<link href="~/Content/LABmodal.css" rel="stylesheet" />
+    <div class="jumbotron">
+        <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Click to Spool result</button>
     </div>
 
-<script>
-// Get the modal
-var modal = document.getElementById('id01');
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
-</script>*@
+    <div id="id01" class="modal">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+        @using (Html.BeginForm("SheetSearchById", "Home", FormMethod.Post, new { @class="modal-content" }))
+        {
+
+                <div class="container">
+                    <h1>Search</h1>
+
+                    <hr>
+                    <label for="name"><b>Telephone</b></label>
+                    <input type="text" placeholder="Enter Phone Number" name="name">
+
+                    <label for="name"><b>Full name</b></label>
+                    <input type="text" placeholder="Enter Full Name" name="name">
+
+
+
+
+
+
+
+                    <div class="clearfix">
+                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                        <button type="submit" class="signupbtn">Fetch Data</button>
+                    </div>
+                </div>
+
+        }
+        </div>
+
+    <script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+    </script>*@
 

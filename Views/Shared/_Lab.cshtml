@@ -12,14 +12,14 @@
 </head>
 <body>
 
-   
+
     <div class="container body-content">
         <div class="container" style="margin-top:30px">
 
             <img src="~/Content/WhatsApp Image 2021-02-10 at 10.51.58 AM.jpeg" class="img-fluid mx-auto d-block" width="150" />
             <h5 class="text-center">HARLEY AND RAINBOW SPECIALIZED LABORATORIES</h5>
 
-            
+
 
             <ul class="nav justify-content-center" style="background-color:lightgray;">
                 <li class="nav-item">
@@ -51,5 +51,8 @@
             <p class="text-center">&copy; @DateTime.Now.Year - HARLEY AND RAINBOW</p>
         </footer>
     </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

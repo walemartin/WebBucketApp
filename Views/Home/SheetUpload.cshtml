@@ -17,13 +17,13 @@
         <h4>@ViewBag.Result</h4>
         @using (Html.BeginForm("SheetUpload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
-            @*@Html.TextBoxFor(m => m.file, new { type = "file" })
-            @Html.TextBoxFor(model => model.file, new { @type = "file", @class = "input-file" })*@
+            @Html.TextBoxFor(m => m.file, new { type = "file" })
+            @*@Html.TextBoxFor(model => model.file, new { @type = "file", @class = "input-file" })*@
 
-    <div class="custom-file">
+    @*<div class="custom-file">
         <input type="file" class="custom-file-input" id="file">
         <label class="custom-file-label" for="file">Choose file</label>
-    </div>
+    </div>*@
             <button id="submitButton" type="submit" class="btn btn-primary">Upload</button>
             @Html.ValidationMessageFor(model => model.file)
         }

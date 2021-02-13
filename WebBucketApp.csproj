@@ -229,13 +229,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202011030524366_InitialCreate.cs" />
-    <Compile Include="Migrations\202011030524366_InitialCreate.Designer.cs">
-      <DependentUpon>202011030524366_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202012052044140_InitialDatabase.cs" />
-    <Compile Include="Migrations\202012052044140_InitialDatabase.Designer.cs">
-      <DependentUpon>202012052044140_InitialDatabase.cs</DependentUpon>
+    <Compile Include="Migrations\202102122040448_Kuk.cs" />
+    <Compile Include="Migrations\202102122040448_Kuk.Designer.cs">
+      <DependentUpon>202102122040448_Kuk.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -259,6 +255,7 @@
     <Content Include="Content\LABmodal.css" />
     <Content Include="Content\lagos-state-logo.jpg" />
     <Content Include="Content\WhatsApp Image 2021-02-10 at 10.51.58 AM.jpeg" />
+    <Content Include="Ellipsis-1s-200px.gif" />
     <Content Include="favicon-32x32.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -443,6 +440,7 @@
     <Content Include="Views\UploadAuditTrails\Details.cshtml" />
     <Content Include="Views\UploadAuditTrails\Edit.cshtml" />
     <Content Include="Views\UploadAuditTrails\Index.cshtml" />
+    <Content Include="Views\Shared\_LabReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -465,11 +463,8 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202011030524366_InitialCreate.resx">
-      <DependentUpon>202011030524366_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202012052044140_InitialDatabase.resx">
-      <DependentUpon>202012052044140_InitialDatabase.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202102122040448_Kuk.resx">
+      <DependentUpon>202102122040448_Kuk.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
@@ -31,6 +34,19 @@ namespace WebBucketApp.Models
         public string UnitCost { get; set; }
         public string Total { get; set; }
         public string AddedOn { get; set; }
+        public DataTable GetAllSale()
+        {
+            DataTable dt = new DataTable();
+            //string strConString = @"Data Source=WELCOME-PC\SQLSERVER2008;Initial Catalog=MyDB;Integrated Security=True";
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString))
+            {
+                con.Open();
+                SqlCommand cmd = new SqlCommand("Select * from sale", con);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                da.Fill(dt);
+            }
+            return dt;
+        }
     }
     public class FetchARecordAuditTrail
     {

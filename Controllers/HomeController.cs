@@ -7,6 +7,7 @@ using Google.Apis.Util.Store;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.OleDb;
 using System.Data.SqlClient;
 using System.IO;
@@ -37,9 +38,15 @@ namespace WebBucketApp.Controllers
 
             return View();
         }
+        public PartialViewResult ReportPage() 
+        {
+            Thread.Sleep(4000);
+            return PartialView("_LabReport");
+        }
 
         public ActionResult Contact()
         {
+
             ViewBag.Message = "Your contact page.";
 
             return View();
@@ -166,16 +173,20 @@ namespace WebBucketApp.Controllers
         {
             return View();
         }
-        public ActionResult LabRepots()
-        {
-            return View();
-        }
+       
         public ActionResult SheetUpload()
         {
             return View();
         }
+       
+        public ActionResult LabRepots()
+        {
+            Sales model = new Sales();
+            DataTable dt = model.GetAllSale();
+            return View("Home", dt);
+        }
         [HttpPost]
-        public async Task<ActionResult> SheetUpload(ImportExcel importExcel, UploadAuditTrail uploadAuditTrail)
+        public ActionResult SheetUpload(ImportExcel importExcel, UploadAuditTrail uploadAuditTrail)
         {
             if (ModelState.IsValid)
             {
@@ -183,15 +194,15 @@ namespace WebBucketApp.Controllers
                 uploadAuditTrail.file = importExcel.file.FileName;
                 uploadAuditTrail.PostedDate = DateTime.Now;
                 uploadAuditTrail.UserIPAddress = Request.UserHostAddress;
-                uploadAuditTrail.CreatedBy = User.Identity.Name;
+                uploadAuditTrail.CreatedBy = "wale";
                 db.UploadAuditTrails.Add(uploadAuditTrail);
-                await db.SaveChangesAsync();
-                if (!Directory.Exists(path))
-                {
-                    Directory.CreateDirectory(path);
-                }
+                db.SaveChanges();
+                //if (!Directory.Exists(path))
+                //{
+                //    Directory.CreateDirectory(path);
+                //}
                 //Fetch the File Name.
-               
+
                 importExcel.file.SaveAs(path);
 
                 string excelConnectionString = @"Provider='Microsoft.ACE.OLEDB.12.0';Data Source='" + path + "';Extended Properties='Excel 12.0 Xml;IMEX=1'";
@@ -229,6 +240,7 @@ namespace WebBucketApp.Controllers
                 excelConnection.Close();
 
                 ViewBag.Result = "Successfully Imported";
+               
             }
             return View();
         }

@@ -3,7 +3,7 @@ namespace WebBucketApp.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class Kuk : DbMigration
     {
         public override void Up()
         {
@@ -168,6 +168,19 @@ namespace WebBucketApp.Migrations
                 .Index(t => t.CompanyTokenId);
             
             CreateTable(
+                "dbo.FetchARecordAuditTrails",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        ClientPhone = c.String(),
+                        ClientEmail = c.String(),
+                        CreatedBy = c.String(),
+                        UserIPAddress = c.String(),
+                        PostedDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
                 "dbo.ImageDirs",
                 c => new
                     {
@@ -227,6 +240,33 @@ namespace WebBucketApp.Migrations
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
             
             CreateTable(
+                "dbo.Sales",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Region = c.String(),
+                        Person = c.String(),
+                        Item = c.String(),
+                        Units = c.String(),
+                        UnitCost = c.String(),
+                        Total = c.String(),
+                        AddedOn = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.UploadAuditTrails",
+                c => new
+                    {
+                        ID = c.Int(nullable: false, identity: true),
+                        file = c.String(),
+                        CreatedBy = c.String(),
+                        UserIPAddress = c.String(),
+                        PostedDate = c.DateTime(nullable: false),
+                    })
+                .PrimaryKey(t => t.ID);
+            
+            CreateTable(
                 "dbo.WashWorkFlows",
                 c => new
                     {
@@ -267,10 +307,13 @@ namespace WebBucketApp.Migrations
             DropIndex("dbo.AspNetUsers", new[] { "CompanyTokenId" });
             DropIndex("dbo.Products", new[] { "CategoryID" });
             DropTable("dbo.WashWorkFlows");
+            DropTable("dbo.UploadAuditTrails");
+            DropTable("dbo.Sales");
             DropTable("dbo.AspNetRoles");
             DropTable("dbo.LaundryPayments");
             DropTable("dbo.LaundryManagers");
             DropTable("dbo.ImageDirs");
+            DropTable("dbo.FetchARecordAuditTrails");
             DropTable("dbo.RegisterViewModels");
             DropTable("dbo.EditUserViewModels");
             DropTable("dbo.AspNetUserRoles");
